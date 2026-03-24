@@ -1,33 +1,22 @@
-import os
-from playwright.sync_api import sync_playwright
+# import os
+# from playwright.async_api import async_playwright
 
-def take_screenshot_sync(address: str, folder: str):
+# async def take_screenshot(address, folder):
+#     async with async_playwright() as p:
+#         browser = await p.chromium.launch()
+#         page = await browser.new_page()
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+#         await page.goto("http://localhost:3000/map-simulator")
+#         await page.fill("#search", address)
+#         await page.click("#search-btn")
 
-        # load local map.html
-        file_path = os.path.abspath("map.html")
-        page.goto(f"file:///{file_path}")
+#         await page.wait_for_selector("#result img")
 
-        # type + click
-        page.fill("#search", address)
-        page.click("#search-btn")
+#         os.makedirs(folder, exist_ok=True)
 
-        # WAIT FOR RESULT TO LOAD
-        page.wait_for_selector("#result img")
-        page.wait_for_timeout(1000)
+#         path = os.path.join(folder, "view.png")
+#         await page.locator("#result").screenshot(path=path)
 
-        # ensure folder exists
-        os.makedirs(folder, exist_ok=True)
+#         await browser.close()
 
-        screenshot_path = os.path.join(folder, "view.png")
-
-        # take screenshot of result section ONLY
-        element = page.query_selector("#result")
-        element.screenshot(path=screenshot_path)
-
-        browser.close()
-
-        return screenshot_path
+#         return path

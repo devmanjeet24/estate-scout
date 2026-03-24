@@ -1,35 +1,42 @@
-import asyncio
-import os
-from app.tools.browser_tool import take_screenshot_sync
+# import asyncio
+# import os
+# from playwright.async_api import async_playwright
 
-async def inspector_node(state):
-    print("🟡 INSPECTOR STARTED")
 
-    properties = state.get("properties", [])
-    loop = asyncio.get_event_loop()
+# async def inspector_node(state):
+#     print("🟡 INSPECTOR STARTED")
 
-    for p in properties:
+#     properties = state.get("properties", [])
 
-        title = str(p.get("title", "property")).replace(" ", "_")
-        folder = f"data/{title}"
+#     for p in properties:
+#         try:
+#             title = str(p.get("title", "property")).replace(" ", "_")
+#             folder = f"data/{title}"
 
-        try:
-            print("➡️ Taking screenshot for:", p.get("address"))
+#             os.makedirs(folder, exist_ok=True)
 
-            screenshot_path = await loop.run_in_executor(
-                None,
-                take_screenshot_sync,
-                p.get("address"),
-                folder
-            )
+#             async with async_playwright() as playwright:
+#                 browser = await playwright.chromium.launch(headless=True)
+#                 page = await browser.new_page()
 
-            print("✅ Screenshot saved:", screenshot_path)
+#                 await page.goto("http://localhost:3000/map-simulator")
 
-            p["image"] = screenshot_path
-            p["folder"] = folder
+#                 await page.fill("#search", p.get("address"))
+#                 await page.click("#search-btn")
 
-        except Exception as e:
-            print("❌ ERROR:", e)
-            p["image"] = "failed.png"
+#                 await page.wait_for_selector("#result img")
 
-    return state
+#                 path = os.path.join(folder, "view.png")
+
+#                 await page.locator("#result").screenshot(path=path)
+
+#                 await browser.close()
+
+#             p["image"] = path
+#             p["folder"] = folder
+
+#         except Exception as e:
+#             print("❌ INSPECTOR ERROR:", str(e))
+#             p["image"] = None
+
+#     return state

@@ -1,46 +1,30 @@
+from bson import ObjectId
 from app.db.database import db
 from app.models.property_model import property_model
-from app.utils.logger import logger
 
-async def create_property(property_data, user_email):
-    try:
-        data = property_data.dict()
-        data["created_by"] = user_email
-
-        result = await db.properties.insert_one(data)
-
-        logger.info(f"Property created: {result.inserted_id}")
-
-        return {"msg": "Property created"}
-
-    except Exception as e:
-        logger.error(f"Error creating property: {str(e)}")
-        raise Exception("Failed to create property")
-
-
+# ✅ ADD THIS FUNCTION
 async def get_all_properties(user_email):
-    try:
-        properties = []
+    properties = []
 
-        async for p in db.properties.find({"created_by": user_email}):
-            properties.append(property_model(p))
+    async for p in db.properties.find({"created_by": user_email}):
+        properties.append(property_model(p))
 
-        return properties
-
-    except Exception as e:
-        logger.error(f"Error fetching properties: {str(e)}")
-        raise Exception("Failed to fetch properties")
+    return properties
 
 
 async def get_property_by_id(property_id):
-    try:
-        p = await db.properties.find_one({"_id": property_id})
+    p = await db.properties.find_one({"_id": ObjectId(property_id)})
+    return property_model(p)
 
-        if not p:
-            raise Exception("Property not found")
 
-        return property_model(p)
+async def delete_property(property_id):
+    await db.properties.delete_one({"_id": ObjectId(property_id)})
+    return {"msg": "deleted"}
 
-    except Exception as e:
-        logger.error(f"Error fetching property: {str(e)}")
-        raise Exception("Error getting property")
+
+async def update_property(property_id, data):
+    await db.properties.update_one(
+        {"_id": ObjectId(property_id)},
+        {"$set": data}
+    )
+    return {"msg": "updated"}

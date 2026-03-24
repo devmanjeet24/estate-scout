@@ -1,25 +1,14 @@
 import os
+import re
+
 
 async def broker_node(state):
+    print("🔵 BROKER STARTED")
+
+    updated = []
 
     for p in state.get("properties", []):
+        p["lease"] = f"Lease for {p.get('title')} at {p.get('price')}"
+        updated.append(p)
 
-        title = str(p.get("title", "property")).replace(" ", "_")
-        folder = f"data/{title}"
-
-        os.makedirs(folder, exist_ok=True)
-
-        # always create lease file
-        lease_path = os.path.join(folder, "lease.txt")
-
-        with open(lease_path, "w", encoding="utf-8") as f:
-            f.write(f"""
-Lease Agreement
-Title: {p.get('title')}
-Address: {p.get('address')}
-Price: {p.get('price')}
-""")
-
-        p["folder"] = folder
-
-    return state
+    return {**state, "properties": updated}
