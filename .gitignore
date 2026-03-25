@@ -1,0 +1,90 @@
+# =========================
+# 🔐 ENV FILES
+# =========================
+.env
+.env.local
+.env.*.local
+*.env
+
+# =========================
+# 🧠 PYTHON (FastAPI)
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Python build
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# =========================
+# ⚛️ NEXT.JS / NODE
+# =========================
+node_modules/
+.next/
+out/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Lock files (optional)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# =========================
+# 📦 CACHE / TEMP
+# =========================
+.cache/
+.tmp/
+temp/
+
+# =========================
+# 🧪 TEST / COVERAGE
+# =========================
+coverage/
+.pytest_cache/
+
+# =========================
+# 🖥️ OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# 🧰 EDITOR FILES
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# 🔒 SECRETS / KEYS
+# =========================
+*.pem
+*.key
+*.crt
+
+# =========================
+# 🖼️ OPTIONAL (STATIC FILES)
+# =========================
+# Uncomment if needed
+# uploads/
+# media/

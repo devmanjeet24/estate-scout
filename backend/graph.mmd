@@ -1,0 +1,20 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	scout(scout)
+	inspector(inspector)
+	broker(broker)
+	crm(crm)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> scout;
+	broker --> crm;
+	inspector --> broker;
+	scout --> inspector;
+	crm --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

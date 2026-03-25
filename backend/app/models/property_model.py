@@ -1,10 +1,8 @@
-def property_model(property) -> dict:
-    return {
-        "id": str(property["_id"]),
-        "title": property["title"],
-        "price": property["price"],
-        "address": property["address"],
-        "description": property.get("description", ""),
-        "image": property.get("image", ""),
-        "folder": property.get("folder", "")
-    }
+from pydantic import BaseModel
+
+
+class Property(BaseModel):
+    title: str
+    price: str
+    address: str
+    image: str

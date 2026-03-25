@@ -1,6 +1,5 @@
-def user_model(user) -> dict:
-    return {
-        "id": str(user["_id"]),
-        "email": user["email"],
-        "preferences": user.get("preferences", {})
-    }
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    preferences: dict

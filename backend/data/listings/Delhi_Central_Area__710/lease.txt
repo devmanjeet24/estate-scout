@@ -1,0 +1,14 @@
+
+===== PROPERTY LEASE AGREEMENT =====
+
+Title   : Apartment Listing
+Price   : ₹13403
+Address : Delhi Central Area #710
+
+Terms & Conditions:
+- Minimum lease duration: 12 months
+- Security deposit required
+- No illegal activities allowed
+- Property inspection completed
+
+Status: Ready for lease
